@@ -4,8 +4,8 @@ import Home from './Pages/Home.jsx'; // landing page
 import Dash from './Pages/Dash';
 import Add from './Pages/Add';
 import Pnf from './Pages/Pnf';
-import Header from './components/header.jsx';
-import Footer from './components/footer.jsx';
+import Header from './components/Header.jsx';
+import Footer from './components/Footer.jsx';
 import View from './Pages/View.jsx';
 import Payment from './Pages/Payment.jsx';
 import Edit from "./Pages/Edit";
