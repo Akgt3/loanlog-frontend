@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 function Add() {
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
+
 
   const [loanData, setLoanData] = useState({
     borrower: "",
@@ -29,6 +31,7 @@ function Add() {
     // Convert numbers
     const payload = {
       ...loanData,
+      userId, // ✅ ADD THIS LINE
       amountBorrowed: Number(loanData.amountBorrowed),
       amountPaid: Number(loanData.amountPaid),
       interest: Number(loanData.interest),

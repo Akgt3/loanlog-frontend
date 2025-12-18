@@ -6,6 +6,8 @@ import Empty from "./Empty";
 function Dash() {
   const [loans, setLoans] = useState([]);
   const [loading, setLoading] = useState(true);
+  const userId = localStorage.getItem("userId");
+
   const navigate = useNavigate();
   const getLoanStatus = (loan) => {
     const today = new Date();
@@ -33,7 +35,7 @@ function Dash() {
 
   // Fetch loans from JSON server
   useEffect(() => {
-    fetch("https://loanlog-api-2.onrender.com/loans") // adjust your JSON server endpoint
+    fetch(`https://loanlog-api-2.onrender.com/loans?userId=${userId}`)
       .then((res) => res.json())
       .then((data) => {
         setLoans(data);

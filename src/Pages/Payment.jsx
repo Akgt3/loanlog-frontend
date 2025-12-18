@@ -6,6 +6,8 @@ function Payment() {
   const navigate = useNavigate();
   const { id } = useParams();
   const loanId = Number(id); // ✅ convert string → number
+  const userId = localStorage.getItem("userId");
+
 
   const [loans, setLoans] = useState([]);
   const [selectedLoan, setSelectedLoan] = useState(null);
@@ -47,7 +49,7 @@ function Payment() {
 
     const fetchPayments = async () => {
       const res = await fetch(
-        `https://loanlog-api-2.onrender.com/payments?loanId=${selectedLoan.id}`
+        `https://loanlog-api-2.onrender.com/payments?loanId=${selectedLoan.id}&userId=${userId}`
       );
       const data = await res.json();
       setPayments(data);
@@ -97,6 +99,7 @@ function Payment() {
 
     const paymentPayload = {
       loanId: selectedLoan.id,
+      userId, // ✅ IMPORTANT
       ...form,
       amount
     };
