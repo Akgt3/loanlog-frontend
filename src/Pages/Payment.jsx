@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 function Payment() {
+
   const navigate = useNavigate();
   const { id } = useParams();
   const loanId = Number(id); // ✅ convert string → number
@@ -24,24 +25,27 @@ function Payment() {
   /* ================= FETCH LOANS ================= */
   useEffect(() => {
     const fetchLoans = async () => {
-      const res = await fetch("https://loanlog-api-2.onrender.com/loans");
+
+      const res = await fetch(
+        `https://loanlog-api-2.onrender.com/loans?userId=${userId}`
+      );
       const data = await res.json();
 
       setLoans(data);
 
-      if (data.length > 0) {
-        const loanFromUrl = id
-          ? data.find(l => l.id === loanId)
-          : data[0];
+      const loanFromUrl = data.find(
+        l => l.id === loanId && l.userId === userId
+      );
 
-        setSelectedLoan(loanFromUrl);
-      }
+      setSelectedLoan(loanFromUrl || null);
+
+
 
       setLoading(false);
     };
 
     fetchLoans();
-  }, [id]);
+  }, [id, userId]);
 
   /* ================= FETCH PAYMENTS ================= */
   useEffect(() => {
