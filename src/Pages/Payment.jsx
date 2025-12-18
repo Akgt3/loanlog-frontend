@@ -49,10 +49,12 @@ function Payment() {
 
     const fetchPayments = async () => {
       const res = await fetch(
-        `https://loanlog-api-2.onrender.com/payments?loanId=${selectedLoan.id}&userId=${userId}`
+        `https://loanlog-api-2.onrender.com/payments?loanId=${selectedLoan.id}`
       );
       const data = await res.json();
-      setPayments(data);
+
+      const filtered = data.filter(p => p.userId === userId);
+      setPayments(filtered);
     };
 
     fetchPayments();
