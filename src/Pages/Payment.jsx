@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 function Payment() {
   const navigate = useNavigate();
   const { id } = useParams();
+  const loanId = Number(id); // ✅ convert string → number
 
   const [loans, setLoans] = useState([]);
   const [selectedLoan, setSelectedLoan] = useState(null);
@@ -28,7 +29,7 @@ function Payment() {
 
       if (data.length > 0) {
         const loanFromUrl = id
-          ? data.find(l => l.id === id)
+          ? data.find(l => l.id === loanId)
           : data[0];
 
         setSelectedLoan(loanFromUrl);
@@ -168,7 +169,7 @@ function Payment() {
             value={selectedLoan.id}
             onChange={(e) =>
               setSelectedLoan(
-                loans.find(l => l.id === e.target.value)
+                loans.find(l => l.id === Number(e.target.value))
               )
             }
             className="w-full mb-4 px-3 py-2 border rounded-md"
